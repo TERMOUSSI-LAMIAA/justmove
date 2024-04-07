@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use App\Models\Category;
+use App\Models\Sport;
 
 class UserController extends Controller
 {
@@ -20,7 +23,11 @@ class UserController extends Controller
     }
     public function adminDashboard()
     {
-        return view("admin.dashboard");
+        $totalCategories = Category::count();
+        $totalSports= Sport::count();
+        $totalUsers= User::where('type_user','user')->count();
+        $totalMembers= User::where('type_user','member')->count();
+        return view("admin.dashboard", compact('totalCategories', 'totalSports', 'totalUsers', 'totalMembers'));
     }
     public function userDashboard()
     {
@@ -29,6 +36,16 @@ class UserController extends Controller
     public function addUserForm()
     {
         return view("admin.addUser");
+    }
+    public function userList()
+    {
+        $users = User::where('type_user','user')->get();
+        return view("admin.userList", compact("users"));
+    }
+    public function membersList()
+    {
+        $members = User::where('type_user', 'member')->get();
+        return view("admin.membersList", compact("members"));
     }
     public function register(Request $request, $isMemberRegistration = false)
     {
@@ -92,5 +109,45 @@ class UserController extends Controller
         Session::flush();
         Auth::logout();
         return redirect()->route('home');
+    }
+
+    public function editUserForm($id){
+        $user = User::findOrFail($id);
+        return view("admin.editUser",compact("user"));
+    }
+
+    public function updateUser(Request $request, $id){
+        $user = User::findOrFail($id);
+
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'categorie' => 'required|string|max:255',
+            'date_naissance' => 'nullable|date',
+        ]);
+        if ($request->hasFile('photo')) {
+            if ($user->photo) {
+                Storage::delete($user->photo);
+            }
+            $user->photo = $request->file('photo')->store('imgs', 'public');
+        }
+        $user->name = $validatedData['name'];
+        $user->email = $validatedData['email'];
+        $user->categorie = $validatedData['categorie'];
+        $user->date_naissance = $validatedData['date_naissance'];
+        $user->save();
+
+        $redirectRoute = ($user->type_user === 'member') ? 'membersList' : 'usersList';
+
+        return redirect()->route($redirectRoute)->with('success', 'Record updated successfully');
+    }
+
+    public function deleteUser($id){
+        $user = User::findOrFail($id);
+
+        $user->delete();
+
+        $redirectRoute = ($user->type_user === 'member') ? 'membersList' : 'usersList';
+        return redirect()->route($redirectRoute)->with('success', 'Record deleted successfully');
     }
 }
