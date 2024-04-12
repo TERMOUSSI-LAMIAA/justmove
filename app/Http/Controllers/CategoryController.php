@@ -106,6 +106,7 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
+        //?soft delete
         $category = Category::findOrFail($id);
 
         if ($category->img) {

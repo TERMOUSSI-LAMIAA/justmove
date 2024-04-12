@@ -27,14 +27,18 @@
 
     <div id="wrapper">
         <!-- Navigation Bar -->
-        @include('layouts.navigationAdmin')
+        @if (auth()->user()->type_user === 'admin')
+            @include('layouts.navigationAdmin')
+        @elseif (auth()->user()->type_user === 'user')
+            @include('layouts.navigationUser')
+        @endif
 
         @if (session('success'))
             <div id="success-alert" class="alert alert-success">
                 {{ session('success') }}
             </div>
         @endif
-        
+
         <div class="container-fluid">
             @yield('content')
         </div>

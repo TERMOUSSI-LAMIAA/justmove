@@ -21,8 +21,11 @@ return new class extends Migration
             $table->enum('categorie', ['Male', 'Female'])->nullable();
             $table->date('date_naissance')->nullable();
             $table->string('photo')->nullable();
+            $table->foreignId('sport_id')->nullable()->constrained('sport');
+            $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
+
         });
     }
 

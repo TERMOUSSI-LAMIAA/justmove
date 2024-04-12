@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SportController;
+use App\Http\Controllers\SubscriptionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +36,9 @@ Route::get('/admin/usersList', [UserController::class, 'userList'])->name('users
 Route::get('/admin/membersList', [UserController::class, 'membersList'])->name('membersList');
 Route::resource('category', CategoryController::class);
 Route::resource('sport', SportController::class);
+Route::resource('subscription', SubscriptionController::class);
 Route::get('/admin/editUserForm/{id}', [UserController::class, 'editUserForm'])->name('editUserForm');
 Route::get('/admin/editmemberForm', [UserController::class, 'editmemberForm'])->name('editmemberForm');
 Route::delete('/admin/deletemember', [UserController::class, 'deletemember'])->name('deletemember');
 Route::get('/user/dashboard', [UserController::class, 'userDashboard'])->name('user.dashboard');
+Route::get('/user/subscriptionsList', [UserController::class, 'subscriptionsList'])->name('subscriptionsList');

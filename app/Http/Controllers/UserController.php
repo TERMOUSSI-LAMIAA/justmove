@@ -35,7 +35,8 @@ class UserController extends Controller
     }
     public function addUserForm()
     {
-        return view("admin.addUser");
+        $sports=Sport::all();
+        return view("admin.addUser",compact('sports'));
     }
     public function userList()
     {
@@ -43,11 +44,11 @@ class UserController extends Controller
         return view("admin.userList", compact("users"));
     }
     public function membersList()
-    {
+    {//todo: and check that the user have a subscription to be a member
         $members = User::where('type_user', 'member')->get();
         return view("admin.membersList", compact("members"));
     }
-    public function register(Request $request, $isMemberRegistration = false)
+    public function register(Request $request, $isMemberRegistration = false, $sportId = null)
     {
         $request->validate([
             'name' => 'required|string|max:255',
@@ -56,6 +57,7 @@ class UserController extends Controller
             'categorie' => 'nullable|string|in:Male,Female',
             'date_naissance' => 'nullable|date',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'sport_id' => 'nullable|exists:sport,id'
         ]);
 
         $user = new User();
@@ -65,6 +67,7 @@ class UserController extends Controller
         $user->type_user = $isMemberRegistration ? 'member' : 'user';
         $user->categorie = $request->categorie;
         $user->date_naissance = $request->date_naissance;
+        $user->sport_id = $sportId;
 
         if ($request->hasFile('photo')) {
             $user->photo = $request->file('photo')->store('imgs', 'public');
@@ -75,7 +78,8 @@ class UserController extends Controller
 
     public function addUser(Request $request)
     {
-        $this->register($request);
+        $sportId = $request->input('sport_id');
+        $this->register($request ,false, $sportId);
         return redirect()->back()->with('success', 'Usre added successfully!');
     }
     public function addMember(Request $request)

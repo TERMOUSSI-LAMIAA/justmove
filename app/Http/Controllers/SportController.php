@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Models\Sport;
 use App\Models\Category;
+use Illuminate\Support\Facades\Storage;
+
 
 class SportController extends Controller
 {
@@ -24,7 +26,7 @@ class SportController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view("admin.addSport",compact("categories"));
+        return view("admin.addSport", compact("categories"));
     }
 
     /**
@@ -35,8 +37,8 @@ class SportController extends Controller
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', 
-            'category_id' => 'required|exists:category,id', 
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'category_id' => 'required|exists:category,id',
         ]);
 
         $sport = new Sport();
@@ -64,7 +66,8 @@ class SportController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $sport = Sport::findOrFail($id);
+        return view('admin.editSport', compact('sport'));
     }
 
     /**
@@ -72,7 +75,25 @@ class SportController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $sport = Sport::findOrFail($id);
+
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $sport->title = $validatedData['title'];
+        $sport->description = $validatedData['description'];
+
+        if ($request->hasFile('img')) {
+            if ($sport->img) {
+                Storage::delete($sport->img);
+            }
+            $sport->img = $request->file('img')->store('imgs', 'public');
+        }
+        $sport->save();
+        return redirect()->route('sport.index')->with('success', 'Sport updated successfully');
     }
 
     /**
@@ -80,6 +101,13 @@ class SportController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        //?soft delete
+
+        $sport = Sport::findOrFail($id);
+        if ($sport->img) {
+            Storage::delete($sport->img);
+        }
+        $sport->delete();
+        return redirect()->route('sport.index')->with('success', 'Sport deleted successfully');
     }
 }

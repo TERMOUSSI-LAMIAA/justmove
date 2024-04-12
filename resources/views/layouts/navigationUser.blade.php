@@ -32,13 +32,13 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
             aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-cog"></i>
-            <span>users</span>
+            <span>Subsrciptions</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">management:</h6>
-                <a class="collapse-item" href="{{ route('usersList') }}">Users list</a>
-                <a class="collapse-item" href="{{ route('addUserForm') }}">Add user</a>
+                <a class="collapse-item" href="{{ route('subscriptionsList') }}">Visitors</a>
+                {{-- <a class="collapse-item" href="{{ route('addUserForm') }}">Add user</a> --}}
             </div>
         </div>
     </li>
@@ -48,12 +48,12 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
             aria-expanded="true" aria-controls="collapseUtilities">
             <i class="fas fa-fw fa-wrench"></i>
-            <span>Members</span>
+            <span>TEST</span>
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">management:</h6>
-                <a class="collapse-item" href="{{ route('membersList') }}">Members list</a>
+                <a class="collapse-item" href="">Members list</a>
             </div>
         </div>
     </li>
@@ -68,8 +68,8 @@
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Category Management:</h6>
-                <a class="collapse-item" href="{{ route('category.index') }}">Categories List</a>
-                <a class="collapse-item" href="{{ route('category.create') }}">Add Category</a>
+                <a class="collapse-item" href="">Categories List</a>
+                <a class="collapse-item" href="">Add Category</a>
             </div>
         </div>
     </li>
@@ -86,27 +86,13 @@
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">management:</h6>
-                <a class="collapse-item" href="{{ route('sport.index') }}">Sports list</a>
-                <a class="collapse-item" href="{{ route('sport.create') }}">Add sport</a>
+                <a class="collapse-item" href="">Sports list</a>
+                <a class="collapse-item" href="">Add sport</a>
             </div>
         </div>
     </li>
-    <!-- Nav Item - Subscriptions Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSubscriptions"
-            aria-expanded="true" aria-controls="collapseSubscriptions">
-            <i class="fas fa-fw fa-folder"></i>
-            <span>Subscriptions</span>
-        </a>
-        <div id="collapseSubscriptions" class="collapse" aria-labelledby="headingSubscriptions"
-            data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Management:</h6>
-                <a class="collapse-item" href="{{ route('subscription.index') }}">All Subscriptions</a>
-                <a class="collapse-item" href="{{ route('subscription.create') }}">Add Subscription</a>
-            </div>
-        </div>
-    </li>
+   
+
 
     <!-- Divider -->
     <hr class="sidebar-divider">

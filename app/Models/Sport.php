@@ -22,4 +22,15 @@ class Sport extends Model
     {
         return $this->belongsTo(Category::class);
     }
+    
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
+
+    public function userSubscriptions()
+    {
+        return $this->belongsToMany(User::class, 'user_subscriptions');
+    }
+
 }

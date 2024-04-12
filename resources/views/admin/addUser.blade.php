@@ -54,6 +54,16 @@
                                     <input type="file" class="form-control-file" name="photo" id="photo">
                                 </div>
                             </div>
+                             <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <label for="sport_id">Sport:</label><br>
+                                    <select class="form-control" id="sport_id" name="sport_id">
+                                        @foreach($sports as $sport)
+                                            <option value="{{ $sport->id }}">{{ $sport->title }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                             <button type="submit" class="btn btn-primary btn-user btn-block">
                                 Add user
                             </button>

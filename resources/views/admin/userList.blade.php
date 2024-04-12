@@ -23,6 +23,7 @@
                                 <th>Email</th>
                                 <th>Category</th>
                                 <th>Birth date</th>
+                                <th>Sport</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -35,6 +36,7 @@
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->categorie }}</td>
                                     <td>{{ $user->date_naissance }}</td>
+                                    <td>{{ $user->sport->title }}</td>
                                     <td>
                                         <!-- Update User Button -->
                                         <a href="{{ route('editUserForm', ['id' => $user->id]) }}"
