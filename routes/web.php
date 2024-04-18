@@ -6,6 +6,9 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SportController;
 use App\Http\Controllers\SubscriptionController;
 
+use App\Http\Controllers\SessionController;
+use App\Http\Controllers\UserSubscriptionController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,12 +36,15 @@ Route::delete('admin/deleteUser/{id}', [UserController::class, 'deleteUser'])->n
 
 Route::get('/admin/dashboard', [UserController::class, 'adminDashboard'])->name('admin.dashboard');
 Route::get('/admin/usersList', [UserController::class, 'userList'])->name('usersList');
-Route::get('/admin/membersList', [UserController::class, 'membersList'])->name('membersList');
+Route::get('/membersList', [UserController::class, 'membersList'])->name('membersList');
 Route::resource('category', CategoryController::class);
 Route::resource('sport', SportController::class);
 Route::resource('subscription', SubscriptionController::class);
+Route::resource('session',SessionController::class);
 Route::get('/admin/editUserForm/{id}', [UserController::class, 'editUserForm'])->name('editUserForm');
 Route::get('/admin/editmemberForm', [UserController::class, 'editmemberForm'])->name('editmemberForm');
 Route::delete('/admin/deletemember', [UserController::class, 'deletemember'])->name('deletemember');
 Route::get('/user/dashboard', [UserController::class, 'userDashboard'])->name('user.dashboard');
+Route::get('/user/subscribeMemberForm/{user_id}', [UserSubscriptionController::class, 'subscribeMemberForm'])->name('subscribeMemberForm');
+Route::post('/user/subscribe', [UserSubscriptionController::class, 'subscribe'])->name('subscribe');
 Route::get('/user/subscriptionsList', [UserController::class, 'subscriptionsList'])->name('subscriptionsList');

@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 use Database\Seeders\UserSeeder;
+use Database\seeders\SportSeeder;
+use Database\seeders\CategorySeeder;
+use Database\seeders\SubscriptionsSeeder;
 
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -21,6 +24,11 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+        $this->call([CategorySeeder::class]);
+        $this->call([SportSeeder::class]);
         $this->call([ UserSeeder::class]);
+      
+  
+        $this->call([SubscriptionsSeeder::class]);
     }
 }

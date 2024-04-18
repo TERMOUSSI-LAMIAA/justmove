@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->integer('session_count');
             $table->decimal('price', 8, 2);
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->enum('type', ['Monthly', 'Trimester' , 'Semester','Annual']);
+          
             $table->softDeletes();
             $table->timestamps();
         });

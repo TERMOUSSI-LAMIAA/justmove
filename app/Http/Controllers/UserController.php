@@ -44,7 +44,7 @@ class UserController extends Controller
         return view("admin.userList", compact("users"));
     }
     public function membersList()
-    {//todo: and check that the user have a subscription to be a member
+    {//? and check that the user have a subscription to be a member
         $members = User::where('type_user', 'member')->get();
         return view("admin.membersList", compact("members"));
     }
@@ -154,4 +154,6 @@ class UserController extends Controller
         $redirectRoute = ($user->type_user === 'member') ? 'membersList' : 'usersList';
         return redirect()->route($redirectRoute)->with('success', 'Record deleted successfully');
     }
+
+    
 }

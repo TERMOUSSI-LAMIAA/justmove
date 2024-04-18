@@ -1,4 +1,4 @@
-td@extends('layouts.app')
+@extends('layouts.app')
 
 @section('content')
     <!-- main content -->
@@ -36,16 +36,20 @@ td@extends('layouts.app')
                                     <td>{{ $member->categorie }}</td>
                                     <td>{{ $member->date_naissance }}</td>
                                     <td>
-                                        <!-- Update User Button -->
-                                        <a href="{{ route('editUserForm', ['id' => $member->id]) }}"
-                                            class="btn btn-primary btn-sm">Edit</a>
-                                        <!-- Delete User Button -->
-                                        <form action="{{ route('deleteUser', ['id' => $member->id]) }}" method="POST"
-                                            style="display: inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                        </form>
+                                        @if (Auth::user()->type_user === 'admin')
+                                            <!-- Update User Button -->
+                                            <a href="{{ route('editUserForm', ['id' => $member->id]) }}"
+                                                class="btn btn-primary btn-sm">Edit</a>
+                                            <!-- Delete User Button -->
+                                            <form action="{{ route('deleteUser', ['id' => $member->id]) }}" method="POST"
+                                                style="display: inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                            </form>
+                                        @elseif(Auth::user()->type_user === 'user')
+                                            <a href="{{ route('subscribeMemberForm',['user_id' => $member->id]) }}" class="btn btn-primary btn-sm">Subscribe</a>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

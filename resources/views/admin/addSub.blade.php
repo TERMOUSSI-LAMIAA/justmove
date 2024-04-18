@@ -19,18 +19,20 @@
                             <input type="number" class="form-control form-control-user" id="session_count"
                                 name="session_count" placeholder="Session Count">
                         </div>
+                         <div class="form-group">
+                            <label for="type">Subscription Type:</label><br>
+                            <select class="form-control" id="type" name="type">
+                                <option value="Monthly">Monthly</option>
+                                <option value="Trimester">Trimester</option>
+                                <option value="Semester">Semester</option>
+                                <option value="Annual">Annual</option>
+                            </select>
+                        </div>
                         <div class="form-group">
                             <input type="number" class="form-control form-control-user" id="price" name="price"
                                 placeholder="Price">
                         </div>
-                        <div class="form-group">
-                            <label for="start_date">Start Date:</label><br>
-                            <input type="date" class="form-control" id="start_date" name="start_date"  value="{{ date('Y-m-d') }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="end_date">End Date:</label><br>
-                            <input type="date" class="form-control" id="end_date" name="end_date">
-                        </div>
+                    
                         <button type="submit" class="btn btn-primary btn-user btn-block">
                             Add Subscription
                         </button>

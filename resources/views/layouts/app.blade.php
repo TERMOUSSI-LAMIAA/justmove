@@ -39,6 +39,12 @@
             </div>
         @endif
 
+        @if (session('error'))
+            <div id="error-alert" class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+        
         <div class="container-fluid">
             @yield('content')
         </div>

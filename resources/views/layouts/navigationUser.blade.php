@@ -37,7 +37,7 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">management:</h6>
-                <a class="collapse-item" href="{{ route('subscriptionsList') }}">Visitors</a>
+                <a class="collapse-item" href="{{ route('membersList') }}">Members</a>
                 {{-- <a class="collapse-item" href="{{ route('addUserForm') }}">Add user</a> --}}
             </div>
         </div>
@@ -48,46 +48,13 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
             aria-expanded="true" aria-controls="collapseUtilities">
             <i class="fas fa-fw fa-wrench"></i>
-            <span>TEST</span>
+            <span>Sessions</span>
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">management:</h6>
-                <a class="collapse-item" href="">Members list</a>
-            </div>
-        </div>
-    </li>
-    {{-- categories --}}
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCategories"
-            aria-expanded="true" aria-controls="collapseCategories">
-            <i class="fas fa-fw fa-tags"></i>
-            <span>Categories</span>
-        </a>
-        <div id="collapseCategories" class="collapse" aria-labelledby="headingCategories"
-            data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Category Management:</h6>
-                <a class="collapse-item" href="">Categories List</a>
-                <a class="collapse-item" href="">Add Category</a>
-            </div>
-        </div>
-    </li>
-
-    {{-- end  categories --}}
-
-    <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-            aria-expanded="true" aria-controls="collapsePages">
-            <i class="fas fa-fw fa-folder"></i>
-            <span>Sports</span>
-        </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">management:</h6>
-                <a class="collapse-item" href="">Sports list</a>
-                <a class="collapse-item" href="">Add sport</a>
+                <a class="collapse-item" href="{{route('session.index')}}">All sessions</a>
+                <a class="collapse-item" href="{{route('session.create')}}">Add session</a>
             </div>
         </div>
     </li>
