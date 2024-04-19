@@ -251,7 +251,7 @@
                         <div class="col-xs-10 text-right menu-1">
                             <ul>
                                 <li class="active"><a href="{{ route('home') }}">Home</a></li>
-                                <li><a href="gallery.html">Gallery</a></li>
+                                <li><a href="{{route('displaySports')}}">Sports</a></li>
                                 <li><a href="contact.html">Contact</a></li>
                                 @guest
                                     <li><a href="{{ route('registerForm') }}">Register</a></li>

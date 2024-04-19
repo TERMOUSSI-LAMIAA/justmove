@@ -15,13 +15,13 @@ class SessionController extends Controller
     {
         // $sessions = Session::all();
         $newSessions = Session::where('date', '>=', now()->toDateString())
-        ->where('start_time', '>=', now()->toTimeString())
+        // ->where('start_time', '>=', now()->toTimeString())
         ->get();
 
         $oldSessions = Session::where('date', '<', now()->toDateString())
-        ->where('start_time', '<', now()->toTimeString())
+        // ->where('start_time', '<', now()->toTimeString())
         ->get();
-
+      
         return view('user.session.AllSessions', compact('newSessions', 'oldSessions'));
     }
 
@@ -40,8 +40,8 @@ class SessionController extends Controller
     {
         $validatedData = $request->validate([
             'date' => 'required|date',
-            'start_time' => 'required|date_format:H:i:s',
-            'end_time' => 'required|date_format:H:i:s|after:start_time',
+            'start_time' => 'required|date_format:H:i',
+            'end_time' => 'required|date_format:H:i |after:start_time',
             'capacity' => 'required|integer|min:1',
         ]);
 

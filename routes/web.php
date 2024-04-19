@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SportController;
 use App\Http\Controllers\SubscriptionController;
 
+use App\Http\Controllers\memberDashboard ;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\UserSubscriptionController;
 
@@ -48,3 +49,5 @@ Route::get('/user/dashboard', [UserController::class, 'userDashboard'])->name('u
 Route::get('/user/subscribeMemberForm/{user_id}', [UserSubscriptionController::class, 'subscribeMemberForm'])->name('subscribeMemberForm');
 Route::post('/user/subscribe', [UserSubscriptionController::class, 'subscribe'])->name('subscribe');
 Route::get('/user/subscriptionsList', [UserController::class, 'subscriptionsList'])->name('subscriptionsList');
+Route::get('/member/displaySports', [memberDashboard::class, 'displayCatgs'])->name('displaySports');
+Route::get('/category/{category}/sports', [memberDashboard::class, 'getCategorySports']);
