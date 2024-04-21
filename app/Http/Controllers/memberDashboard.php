@@ -20,4 +20,19 @@ class memberDashboard extends Controller
         $sports = $category->sports;
         return response()->json($sports);
     }
+
+    public function getSportSessions(Sport $sport)
+    {
+        $users = $sport->users;
+
+        // Gather all sessions for these users
+        $sessions = collect(); // Using a collection to accumulate sessions
+
+        foreach ($users as $user) {
+            $userSessions = $user->sessions; // Get sessions for this user
+            $sessions = $sessions->concat($userSessions); // Add to the collection
+        }
+
+        return response()->json($sessions);
+    }
 }

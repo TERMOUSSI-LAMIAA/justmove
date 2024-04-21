@@ -51,3 +51,5 @@ Route::post('/user/subscribe', [UserSubscriptionController::class, 'subscribe'])
 Route::get('/user/subscriptionsList', [UserController::class, 'subscriptionsList'])->name('subscriptionsList');
 Route::get('/member/displaySports', [memberDashboard::class, 'displayCatgs'])->name('displaySports');
 Route::get('/category/{category}/sports', [memberDashboard::class, 'getCategorySports']);
+Route::get('/sport/{sport}/sessions', [memberDashboard::class, 'getSportSessions']);
+
