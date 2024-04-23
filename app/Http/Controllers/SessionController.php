@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class SessionController extends Controller
-{
+{//todo:send notif to member or all members when update or delete session
     /**
      * Display a listing of the resource.
      */

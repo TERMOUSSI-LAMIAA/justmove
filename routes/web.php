@@ -53,3 +53,4 @@ Route::get('/member/displaySports', [memberDashboard::class, 'displayCatgs'])->n
 Route::get('/category/{category}/sports', [memberDashboard::class, 'getCategorySports']);
 Route::get('/sport/{sport}/sessions', [memberDashboard::class, 'getSportSessions']);
 
+Route::post('/reserve-session', [memberDashboard::class, 'reserveSession'])->name('reserveSession');

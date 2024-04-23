@@ -24,11 +24,12 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
         $this->call([CategorySeeder::class]);
         $this->call([SportSeeder::class]);
-        $this->call([ UserSeeder::class]);
+        // $this->call([ UserSeeder::class]);
       
   
-        $this->call([SubscriptionsSeeder::class]);
+        // $this->call([SubscriptionsSeeder::class]);
     }
 }
