@@ -6,7 +6,10 @@ use App\Models\Category;
 use App\Models\Sport;
 use App\Models\Reservation;
 use App\Models\Session;
+use App\Models\UserSubscription;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+
 
 class memberDashboard extends Controller
 {
@@ -33,9 +36,9 @@ class memberDashboard extends Controller
         }
         return response()->json($sessions);
     }
+
     public function reserveSession(Request $request)
-    {//todo: check the subscription
-        
+    {
         $request->validate([
             'session_id' => 'required|integer|exists:sessions,id',
         ]);
@@ -43,7 +46,31 @@ class memberDashboard extends Controller
         $sessionId = $request->input('session_id');
         $user = auth()->user();
 
-        $session = Session::find($sessionId);
+        $session = Session::findOrFail($sessionId);
+
+        $latestSubscription = UserSubscription::where('user_id', $user->id)
+            ->orderBy('created_at', 'desc')
+            ->first();
+
+        if ($latestSubscription) {
+            $subscription = $latestSubscription->subscription;
+
+            $monthsToAdd = match ($subscription->type) {
+                'Monthly' => 1,
+                'Trimester' => 3,
+                'Semester' => 6,
+                'Annual' => 12,
+                default => 0,
+            };
+
+            $expirationDate = $latestSubscription->created_at->addMonths($monthsToAdd);
+
+            if (Carbon::now() > $expirationDate) {
+                return redirect()->back()->with('error', 'Your subscription has expired. Please renew before reserving.');
+            }
+        } else {
+            return redirect()->back()->with('error', 'You must have an active subscription to reserve a session.');
+        }
         $existingReservation = Reservation::where('user_id', $user->id)
             ->where('session_id', $sessionId)
             ->exists();
@@ -54,15 +81,15 @@ class memberDashboard extends Controller
         $currentReservations = Reservation::where('session_id', $sessionId)->count();
 
         if ($currentReservations >= $session->capacity) {
-            return redirect()->back()->with('error','This session is fully booked.');
+            return redirect()->back()->with('error', 'This session is fully booked.');
         }
-
         $reservation = new Reservation([
             'user_id' => $user->id,
             'session_id' => $sessionId,
         ]);
 
         $reservation->save();
+
         return redirect()->back()->with('success', 'Reservation successful!');
     }
 
