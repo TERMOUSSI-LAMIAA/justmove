@@ -9,6 +9,8 @@ use App\Models\Session;
 use App\Models\UserSubscription;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 
 class memberDashboard extends Controller
@@ -92,5 +94,27 @@ class memberDashboard extends Controller
 
         return redirect()->back()->with('success', 'Reservation successful!');
     }
+    public function memberSession()
+    {
+        $user = Auth::user();
+        $sessions = DB::table('reservations')
+        ->join('sessions', 'reservations.session_id', '=', 'sessions.id')
+        ->where('reservations.user_id', $user->id)
+        ->orderBy('sessions.date', 'asc')
+        ->orderBy('sessions.start_time', 'asc')
+        ->select('reservations.id as reservation_id', 'sessions.*')
+        ->get();
+        return view('member.mySessions', compact('sessions')); 
 
+    }
+    public function cancelReserv(Request $request){
+        $reservationId = $request->route('reservation');
+
+        $reservation = Reservation::find($reservationId);
+
+        $reservation->delete();
+
+        return redirect()->back()->with('success', 'Reservation canceled successfully.');
+    }
+    
 }

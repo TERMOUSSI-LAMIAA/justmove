@@ -51,6 +51,8 @@ Route::post('/user/subscribe', [UserSubscriptionController::class, 'subscribe'])
 Route::get('/user/subscriptionsList', [UserController::class, 'subscriptionsList'])->name('subscriptionsList');
 Route::get('/member/displaySports', [memberDashboard::class, 'displayCatgs'])->name('displaySports');
 Route::get('/category/{category}/sports', [memberDashboard::class, 'getCategorySports']);
+Route::get('/member/memberSession', [memberDashboard::class, 'memberSession'])->name("memberSession");
+Route::delete('/member/cancelReserv/{reservation}', [memberDashboard::class, 'cancelReserv'])->name("cancelReserv");
 Route::get('/sport/{sport}/sessions', [memberDashboard::class, 'getSportSessions']);
 
 Route::post('/reserve-session', [memberDashboard::class, 'reserveSession'])->name('reserveSession');

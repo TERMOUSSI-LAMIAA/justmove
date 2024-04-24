@@ -11,7 +11,7 @@
 
 </head>
 
-<body>
+    <body>
     @if (session('success'))
         <div style="color: green;">
             {{ session('success') }}
