@@ -1,44 +1,56 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('Add Sport') }}</div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    {{ __('Add Sport') }}
+                </div>
+                <div class="card-body">
+                    {{-- Main Content --}}
+                    <form method="POST" action="{{ route('sport.store') }}" enctype="multipart/form-data">
+                        @csrf
 
-                    <div class="card-body">
-                        {{-- main content --}}
-                        <form class="user" method="POST" action="{{ route('sport.store') }}" enctype="multipart/form-data">
-                            @csrf
-                            <div class="form-group">
-                                <input type="text" class="form-control form-control-user" id="title"
-                                    name="title" placeholder="Title">
-                            </div>
-                            <div class="form-group">
-                                <textarea class="form-control form-control-user" id="description"
-                                    name="description" placeholder="Description"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="image">Image:</label><br>
-                                <input type="file" class="form-control-file" name="image" id="image">
-                            </div>
-                            <div class="form-group">
-                                <label for="category_id">Category:</label>
-                                <select class="form-control" id="category_id" name="category_id">
-                                    @foreach($categories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->title }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-user btn-block">
-                                Add Sport
-                            </button>
-                        </form>
-                        {{-- end of main content --}}
-                    </div>
+                        <!-- Title Input -->
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="title" name="title" placeholder="Sport Title" required>
+                        </div>
+
+                        <!-- Description Input -->
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control" id="description" name="description" placeholder="Sport Description" rows="3" required></textarea>
+                        </div>
+
+                        <!-- Image Input -->
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Image</label>
+                            <input type="file" class="form-control" id="image" name="image" accept="image/*">
+                        </div>
+
+                        <!-- Category Selection -->
+                        <div class="mb-3">
+                            <label for="category_id" class="form-label">Category</label>
+                            <select class="form-control" id="category_id" name="category_id" required>
+                                <option value="">Select Category</option>
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Add Sport</button>
+                        </div>
+                    </form>
+                    {{-- End of Main Content --}}
                 </div>
             </div>
         </div>
     </div>
+</div>
 @endsection

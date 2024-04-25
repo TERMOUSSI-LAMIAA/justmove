@@ -155,5 +155,9 @@ class UserController extends Controller
         return redirect()->route($redirectRoute)->with('success', 'Record deleted successfully');
     }
 
+    public function getCoaches(){
+        $users = User::where('type_user', 'user')->get();
+        return view("welcome", compact("users"));
+    }
     
 }

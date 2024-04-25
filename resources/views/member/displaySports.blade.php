@@ -1,160 +1,133 @@
-<!-- resources/views/member/displaySports.blade.php -->
+@extends('layouts.guest')
 
-<!DOCTYPE html>
-<html lang="en">
+@section('content')
+<div class="container my-5">
+    <h1 class="display-4 text-center mb-5">Categories and Sports</h1>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Display Sports</title>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-</head>
-
-    <body>
-    @if (session('success'))
-        <div style="color: green;">
-            {{ session('success') }}
-        </div>
-    @endif
-  @if (session('error'))
-        <div style="color: red;">
-            {{ session('error') }}
-        </div>
-    @endif
-    <h1>Categories and Sports</h1>
-
-    <h2>Categories</h2>
-    <ul>
-        @foreach ($catgs as $category)
-            <div>
-                <img src="{{ asset('storage/' . $category->img) }}" alt="Category Image" width="80">
-                <p><a href="{{ route('category.show', $category->id) }}" class="categoryLink"
-                        data-category-id="{{ $category->id }}">{{ $category->title }}</a></p>
-                <p>{{ $category->description }}</p>
+    <div class="mb-5">
+        <h2 class="h3">Categories</h2>
+        <div class="row">
+            @foreach ($catgs as $category)
+            <div class="col-12 col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <img src="{{ asset('storage/' . $category->img) }}" alt="Category Image" class="card-img-top" style="height: 150px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="#" class="categoryLink text-primary" data-category-id="{{ $category->id }}">{{ $category->title }}</a>
+                        </h5>
+                        <p class="card-text">{{ $category->description }}</p>
+                    </div>
+                </div>
             </div>
+            @endforeach
+        </div>
+    </div>
 
-            <hr>
-        @endforeach
-    </ul>
+    <div class="d-none" id="sportsSection">
+        <h2 class="h3 mb-3">Sports</h2>
+        <ul id="sportsList" class="list-group">
+            <!-- Sports will be populated here -->
+        </ul>
+    </div>
 
-    <h2 id="sportsTitle" style="display: none;">Sports</h2>
-    <ul id="sportsList" style="display: none;">
-        <!-- Sports here -->
-    </ul>
+    <div class="d-none" id="sessionsSection">
+        <h2 class="h3 mb-3">Sessions</h2>
+        <ul id="sessionsList" class="list-group">
+            <!-- Sessions will be populated here -->
+        </ul>
+    </div>
+</div>
 
-    <h2 id="sessionsTitle" style="display: none;">Sessions</h2>
-    <ul id="sessionsList" style="display: none;">
-        <!-- Sessions here -->
-    </ul>
+<script>
+    document.querySelectorAll('.categoryLink').forEach(link => {
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
 
-    <script>
-        document.querySelectorAll('.categoryLink').forEach(link => {
+            const categoryId = this.getAttribute('data-category-id');
+            fetch(`/category/${categoryId}/sports`)
+                .then(response => response.json())
+                .then(data => {
+                    const sportsSection = document.getElementById('sportsSection');
+                    const sportsList = document.getElementById('sportsList');
+
+                    const sessionsSection = document.getElementById('sessionsSection');
+                    const sessionsList = document.getElementById('sessionsList');
+                    sessionsList.innerHTML = '';
+                    sessionsSection.classList.add('d-none');
+
+                    sportsList.innerHTML = '';
+                    data.forEach(sport => {
+                        const listItem = document.createElement('li');
+                        const sportLink = document.createElement('a');
+                        sportLink.textContent = sport.title;
+                        sportLink.href = "#";
+                        sportLink.classList.add("sportLink", "list-group-item", "list-group-item-action");
+                        sportLink.setAttribute('data-sport-id', sport.id);
+                        listItem.appendChild(sportLink);
+                        sportsList.appendChild(listItem);
+                    });
+
+                    sportsSection.classList.remove('d-none');
+                    attachSportLinkListeners();
+                })
+                .catch(error => console.error('Error fetching sports:', error));
+        });
+    });
+
+    function attachSportLinkListeners() {
+        document.querySelectorAll('.sportLink').forEach(link => {
             link.addEventListener('click', function(event) {
                 event.preventDefault();
 
-                // Clear and hide sessions
-                var sessionsList = document.getElementById('sessionsList');
-                var sessionsTitle = document.getElementById('sessionsTitle');
-                sessionsList.innerHTML = '';
-                sessionsTitle.style.display = 'none';
-                sessionsList.style.display = 'none';
-
-                var categoryId = this.getAttribute('data-category-id');
-                fetch('/category/' + categoryId + '/sports') // Fetch sports for the selected category
-                    .then(response => response.json())
-                    .then(data => {
-                        var sportsList = document.getElementById('sportsList');
-                        sportsList.innerHTML = ''; // Clear existing sports
-                        data.forEach(sport => {
-                            var listItem = document.createElement('li');
-                            var sportLink = document.createElement('a');
-                            sportLink.textContent = sport.title;
-                            sportLink.href = "#"; // Placeholder to avoid redirection
-                            sportLink.classList.add(
-                                'sportLink'); // Add a class for easy selection
-                            sportLink.setAttribute('data-sport-id', sport
-                                .id); // Set the sport ID for reference
-                            listItem.appendChild(sportLink); // Append the link to the list item
-                            sportsList.appendChild(
-                                listItem); // Append the list item to the sports list
-                        });
-                        document.getElementById('sportsTitle').style.display = 'block';
-                        sportsList.style.display = 'block';
-
-                        // Attach click event listener to the sport links
-                        attachSportLinkListeners(); // Custom function to add click listeners
+                const sportId = this.getAttribute('data-sport-id');
+                fetch(`/sport/${sportId}/sessions`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
                     })
-                    .catch(error => console.error('Error fetching sports:', error));
+                    .then(data => {
+                        const sessionsSection = document.getElementById('sessionsSection');
+                        const sessionsList = document.getElementById('sessionsList');
+                        sessionsList.innerHTML = '';
+
+                        data.forEach(session => {
+                            const listItem = document.createElement('li');
+                            listItem.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center');
+                            listItem.textContent = `Session Date: ${session.date}`;
+
+                            const reserveForm = document.createElement('form');
+                            reserveForm.method = 'POST';
+                            reserveForm.action = '/reserve-session';
+
+                            const csrfInput = document.createElement('input');
+                            csrfInput.type = 'hidden';
+                            csrfInput.name = '_token';
+                            csrfInput.value = "{{ csrf_token() }}";
+
+                            const sessionIdInput = document.createElement("input");
+                            sessionIdInput.type = 'hidden';
+                            sessionIdInput.name = 'session_id';
+                            sessionIdInput.value = session.id;
+
+                            const reserveButton = document.createElement('button');
+                            reserveButton.type = 'submit';
+                            reserveButton.textContent = 'Reserve';
+                            reserveButton.classList.add('btn', 'btn-primary');
+
+                            reserveForm.append(csrfInput, sessionIdInput, reserveButton);
+
+                            listItem.appendChild(reserveForm);
+
+                            sessionsList.appendChild(listItem);
+                        });
+
+                        sessionsSection.classList.remove('d-none');
+                    })
+                    .catch(error => console.error('Error fetching sessions:', error));
             });
         });
-
-        function attachSportLinkListeners() {
-            document.querySelectorAll('.sportLink').forEach(link => {
-                link.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    console.log("Sport link clicked");
-                    var sportId = this.getAttribute('data-sport-id');
-                    fetch('/sport/' + sportId + '/sessions')
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error('Network response was not ok');
-                            }
-                            return response.json();
-                        })
-                        .then(data => {
-                            console.log("Fetched data:", data); // This will show the raw data
-                            if (Array.isArray(data)) {
-                                var sessionsList = document.getElementById('sessionsList');
-                                sessionsList.innerHTML = '';
-                                data.forEach(session => {
-                                    var listItem = document.createElement('li');
-                                    listItem.textContent = session.date;
-
-
-
-                                    var reserveForm = document.createElement("form");
-                                    reserveForm.method = "POST";
-                                    reserveForm.action = "/reserve-session";
-
-                                    // CSRF token for security
-                                    var csrfInput = document.createElement("input");
-                                    csrfInput.type = "hidden";
-                                    csrfInput.name = "_token";
-                                    csrfInput.value = "{{ csrf_token() }}";
-
-                                    // Hidden input for session ID
-                                    var sessionIdInput = document.createElement("input");
-                                    sessionIdInput.type = "hidden";
-                                    sessionIdInput.name = "session_id";
-                                    sessionIdInput.value = session.id;
-
-                                    var reserveButton = document.createElement("button");
-                                    reserveButton.type = "submit";
-                                    reserveButton.textContent = "Reserve";
-
-                                    reserveForm.appendChild(csrfInput);
-                                    reserveForm.appendChild(sessionIdInput);
-                                    reserveForm.appendChild(reserveButton);
-
-                                    listItem.appendChild(reserveForm);
-
-
-                                    sessionsList.appendChild(listItem);
-                                });
-                                document.getElementById('sessionsTitle').style.display = 'block';
-                                sessionsList.style.display = 'block';
-                            } else {
-                                console.error('Data is not an array as expected');
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Error fetching sessions:', error);
-                        });
-                });
-            });
-        }
-    </script>
-</body>
-
-</html>
+    }
+</script>
+@endsection

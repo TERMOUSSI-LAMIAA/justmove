@@ -1,55 +1,55 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3 text-primary">Categories</h1>
+    </div>
 
-    <!-- Main content -->
-    <div class="container-fluid">
-
-        <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Categories</h1>
-
-        <!-- Category Table -->
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Category List</h6>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
+    <!-- Category Table -->
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h6 class="mb-0">Category List</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Image</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($categories as $category)
                             <tr>
-                                <th>Image</th>
-                                <th>Title</th>
-                                <th>Description</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($categories as $category)
-                                <tr>
-                                    <td><img src="{{ asset('storage/' . $category->img) }}" alt="image" width="80"></td>
-                                    <td>{{ $category->title }}</td>
-                                    <td>{{ $category->description }}</td>
-                                    <td>
-                                        <!-- Update Category Button -->
-                                        <a href="{{ route('category.edit',  ['category' => $category->id]) }}"
-                                            class="btn btn-primary btn-sm">Edit</a>
-                                        <!-- Delete Category Button -->
-                                        <form action="{{ route('category.destroy',  ['category' => $category->id]) }}" method="POST"
-                                            style="display: inline;">
+                                <td>
+                                    <img src="{{ asset('storage/' . $category->img) }}" alt="Category Image" class="img-thumbnail" width="80">
+                                </td>
+                                <td>{{ $category->title }}</td>
+                                <td>{{ $category->description }}</td>
+                                <td>
+                                    <div class="d-flex justify-content-between">
+                                        <!-- Edit Button -->
+                                        <a href="{{ route('category.edit', ['category' => $category->id]) }}" class="btn btn-sm btn-warning">Edit</a>
+                                        
+                                        <!-- Delete Button -->
+                                        <form action="{{ route('category.destroy', ['category' => $category->id]) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this category?')">Delete</button>
                                         </form>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
-
     </div>
-    <!-- End of main content -->
+</div>
 @endsection

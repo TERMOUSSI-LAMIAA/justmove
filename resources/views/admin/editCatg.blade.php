@@ -1,56 +1,54 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('Edit Category') }}</div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    {{ __('Edit Category') }}
+                </div>
+                <div class="card-body">
+                    {{-- Main Content --}}
+                    <form method="POST" action="{{ route('category.update', ['category' => $category->id]) }}" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
 
-                    <div class="card-body">
-                        {{-- main content --}}
-                        <form class="user" method="POST"
-                            action="{{ route('category.update', ['category' => $category->id]) }}"
-                            enctype="multipart/form-data">
-                            @csrf
-                            @method('PUT')
+                        <!-- Title Input -->
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="title" name="title" value="{{ $category->title }}" placeholder="Enter title" required>
+                        </div>
 
-                            <div class="form-group">
-                                <label for="title">Title:</label><br>
-                                <input type="text" class="form-control form-control-user" id="title" name="title"
-                                    placeholder="Title" value="{{ $category->title }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="desc">Description:</label><br>
-                                <textarea class="form-control form-control-user" id="description" name="description" placeholder="Description">{{ $category->description }}</textarea>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                    @if ($category->img)
-                                        <div>
-                                            <p>Current image</p>
-                                            <img src="{{ asset('storage/' . $category->img) }}" alt="Current Photo"
-                                                width="100">
-                                        </div>
-                                    @endif
+                        <!-- Description Textarea -->
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control" id="description" name="description" rows="3" placeholder="Enter description" required>{{ $category->description }}</textarea>
+                        </div>
+
+                        <!-- Current Image Display -->
+                        @if ($category->img)
+                            <div class="mb-3">
+                                <label class="form-label">Current Image</label>
+                                <div>
+                                    <img src="{{ asset('storage/' . $category->img) }}" alt="Current Image" class="img-thumbnail" width="100">
                                 </div>
                             </div>
+                        @endif
 
-                            <div class="form-group row">
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <label for="photo">New image:</label><br>
-                                    <input type="file" class="form-control-file" name="image" id="image">
-                                </div>
-                            </div>
+                        <!-- New Image Input -->
+                        <div class="mb-3">
+                            <label for="image" class="form-label">New Image (optional)</label>
+                            <input type="file" class="form-control" id="image" name="image">
+                        </div>
 
-                            <button type="submit" class="btn btn-primary btn-user btn-block">
-                                Update Category
-                            </button>
-                        </form>
-                        {{-- end of main content --}}
-                    </div>
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn btn-primary">Update Category</button>
+                    </form>
+                    {{-- End of Main Content --}}
                 </div>
             </div>
         </div>
     </div>
+</div>
 @endsection

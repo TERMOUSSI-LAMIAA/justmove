@@ -1,77 +1,80 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('Add User') }}</div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    {{ __('Add User') }}
+                </div>
+                <div class="card-body">
+                    {{-- Main Content --}}
+                    <form method="POST" action="{{ route('addUser') }}" enctype="multipart/form-data">
+                        @csrf
 
-                    <div class="card-body">
-                        {{-- main content --}}
-                        <form class="user" method="POST" action="{{ route('addUser') }}" enctype="multipart/form-data">
-                            @csrf
-                            <div class="form-group row">
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input type="text" class="form-control form-control-user" id="exampleFirstName"
-                                        name="name" placeholder="Name">
+                        <!-- Name Input -->
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" required>
+                        </div>
+
+                        <!-- Email Input -->
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
+                        </div>
+
+                        <!-- Password Input -->
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
+                        </div>
+
+                        <!-- Category Radio Buttons -->
+                        <div class="mb-3">
+                            <label class="form-label">Category</label>
+                            <div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="categorie" id="male" value="Male" required>
+                                    <label class="form-check-label" for="male">Male</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="categorie" id="female" value="Female" required>
+                                    <label class="form-check-label" for="female">Female</label>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                    name="email" placeholder="Email Address">
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input type="password" class="form-control form-control-user" id="exampleInputPassword"
-                                        name="password" placeholder="Password">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <label for="categorie">Category:</label><br>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="categorie" id="maleRadio"
-                                            value="Male">
-                                        <label class="form-check-label" for="maleRadio">Male</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="categorie" id="femaleRadio"
-                                            value="Female">
-                                        <label class="form-check-label" for="femaleRadio">Female</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input type="date" class="form-control form-control-user" name="date_naissance"
-                                        id="date_naissance">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <label for="photo">Photo:</label><br>
-                                    <input type="file" class="form-control-file" name="photo" id="photo">
-                                </div>
-                            </div>
-                             <div class="form-group row">
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <label for="sport_id">Sport:</label><br>
-                                    <select class="form-control" id="sport_id" name="sport_id">
-                                        @foreach($sports as $sport)
-                                            <option value="{{ $sport->id }}">{{ $sport->title }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-user btn-block">
-                                Add user
-                            </button>
-                        </form>
-                        {{-- end of main content --}}
-                    </div>
+                        </div>
+
+                        <!-- Birthdate Input -->
+                        <div class="mb-3">
+                            <label for="date_naissance" class="form-label">Birthdate</label>
+                            <input type="date" class="form-control" id="date_naissance" name="date_naissance" required>
+                        </div>
+
+                        <!-- Photo Input -->
+                        <div class="mb-3">
+                            <label for="photo" class="form-label">Photo (optional)</label>
+                            <input type="file" class="form-control" id="photo" name="photo">
+                        </div>
+
+                        <!-- Sport Selection -->
+                        <div class="mb-3">
+                            <label for="sport_id" class="form-label">Sport</label>
+                            <select class="form-control" id="sport_id" name="sport_id" required>
+                                @foreach($sports as $sport)
+                                    <option value="{{ $sport->id }}">{{ $sport->title }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn btn-primary">Add User</button>
+                    </form>
+                    {{-- End of Main Content --}}
                 </div>
             </div>
         </div>
     </div>
+</div>
 @endsection

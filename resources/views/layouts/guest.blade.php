@@ -12,57 +12,190 @@
     <title>Admin - Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <style>
-        .navbar {
-            background-color: #f8f9fa; /* Light background for navbar */
-            color: #495057; /* Dark text for contrast */
-        }
-        
-        .navbar .navbar-brand, 
-        .navbar .nav-link {
-            color: #495057; /* Default color */
-        }
-        
-        .navbar .nav-link:hover {
-            color: #007bff; /* Blue hover effect */
-            text-decoration: none; /* No underline */
+        /* Importing fonts from Google */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+        /* navbar */
+        .custom-navbar-height {
+    /* Set a minimum height for the navbar */
+    min-height: 70px; /* Adjust this value as needed */
+    
+    /* Adjust internal padding for elements within the navbar */
+    padding-top: 10px; 
+    padding-bottom: 10px;
+
+    /* Ensure proper alignment of elements */
+    display: flex;
+    align-items: center;
+}
+
+.custom-navbar-height .navbar-brand {
+    /* Adjust brand/logo size to fit within the increased navbar height */
+    font-size: 1.5em;
+}
+
+.custom-navbar-height .nav-link {
+    /* Adjust link padding for consistency */
+    padding-top: 15px; 
+    padding-bottom: 15px;
+}
+/* carroussel  */
+.custom-carousel-caption {
+    /* Font settings */
+    font-family: 'Arial', sans-serif;
+    font-size: 1.5em;
+
+    /* Text shadow for better visibility on dark images */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+
+    /* Centering the caption within the carousel */
+    top: 50%;
+    transform: translateY(-50%);
+
+    /* Text alignment for centered text */
+    text-align: center;
+
+    /* Text color for visibility */
+    color: white;
+
+    /* Padding for spacing around text */
+    padding: 10px;
+
+    /* Background color and opacity to add contrast behind text */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+/* end carrousel */
+        /* Reseting */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
         }
 
-        /* Sidebar Styling */
-        #sidebar {
-            background-color: #f8f9fa; /* Light background for sidebar */
-            border-right: 1px solid #dee2e6; /* Border to separate from content */
-            width: 220px; /* Slightly narrower */
-            padding: 10px; /* Consistent padding */
-        }
-        
-        #sidebar .nav-link {
-            color: #495057; /* Default color */
-            padding: 8px; /* Consistent padding */
+        body {
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #d4d5e4, #a1a7ac);
         }
 
-        #sidebar .nav-link:hover {
-            background-color: #e9ecef; /* Light hover effect */
-            color: #007bff; /* Blue hover color */
+        .container {
+            margin-top: 100px;
         }
 
-        /* Sidebar submenu styling */
-        #sidebar .collapse {
-            background-color: #f8f9fa; /* Light background for nested menus */
-        }
-        
-        /* Main content area styling */
-        .content {
-            margin-left: 220px; /* Offset content by sidebar width */
-            padding: 20px; /* Consistent padding */
-            background-color: #ffffff; /* White background for content */
-            transition: all 0.3s; /* Smooth transition */
+        .container .row .col-lg-4 {
+            display: flex;
+            justify-content: center;
         }
 
-        .content h2 {
-            color: #343a40; /* Dark color for headings */
+        .card {
+            position: relative;
+            padding: 0;
+            margin: 0 !important;
+            border-radius: 20px;
+            overflow: hidden;
+            max-width: 280px;
+            max-height: 340px;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+
         }
+
+        .card .card-image {
+            width: 100%;
+            max-height: 340px;
+        }
+
+        .card .card-image img {
+            width: 100%;
+            max-height: 340px;
+            object-fit: cover;
+        }
+
+        .card .card-content {
+            position: absolute;
+            bottom: -180px;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            min-height: 140px;
+            width: 100%;
+            transition: bottom .4s ease-in;
+            box-shadow: 0 -10px 10px rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .card:hover .card-content {
+            bottom: 0px;
+        }
+
+        .card:hover .card-content h4,
+        .card:hover .card-content h5 {
+            transform: translateY(10px);
+            opacity: 1;
+        }
+
+        .card .card-content h4,
+        .card .card-content h5 {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-align: center;
+            transition: 0.8s;
+            font-weight: 500;
+            opacity: 0;
+            transform: translateY(-40px);
+            transition-delay: 0.2s;
+        }
+
+        .card .card-content h5 {
+            transition: 0.5s;
+            font-weight: 200;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+        }
+
+        .card .card-content .social-icons {
+            list-style: none;
+            padding: 0;
+        }
+
+
+        .card .card-content .social-icons li {
+            margin: 10px;
+            transition: 0.5s;
+            transition-delay: calc(0.15s * var(--i));
+            transform: translateY(50px);
+        }
+
+
+        .card:hover .card-content .social-icons li {
+            transform: translateY(20px);
+        }
+
+        .card .card-content .social-icons li a {
+            color: #fff;
+        }
+
+        .card .card-content .social-icons li a span {
+            font-size: 1.3rem;
+        }
+
+        @media(max-width: 991.5px) {
+            .container {
+                margin-top: 20px;
+            }
+
+            .container .row .col-lg-4 {
+                margin: 20px 0px;
+            }
+        }
+
+        /* style FAQ */
+
+
+       
     </style>
 
 </head>
@@ -72,34 +205,28 @@
 
     <div id="wrapper">
         <!-- Navigation Bar -->
-        @if (auth()->user()->type_user === 'admin')
-            @include('layouts.navigationAdmin')
-        @elseif (auth()->user()->type_user === 'user')
-            @include('layouts.navigationUser')
+     
+     
+            @include('layouts.navMember')
+
+
+        @if (session('success'))
+            <div id="success-alert" class="alert alert-success">
+                {{ session('success') }}
+            </div>
         @endif
 
-
-    </div>
-
-    @if (session('success'))
-        <div id="success-alert" class="alert alert-success">
-            {{ session('success') }}
+        @if (session('error'))
+            <div id="error-alert" class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+        
+        <div class="container-fluid">
+            @yield('content')
         </div>
-    @endif
 
-    @if (session('error'))
-        <div id="error-alert" class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-    @endif
-
-    <div>
-        @yield('content')
-    </div>
-
-
-
-  {{-- footer --}}
+{{-- footer --}}
 <!-- Footer 2 - Bootstrap Brain Component -->
 <footer class="footer">
 
@@ -227,15 +354,11 @@
   </div>
 
 </footer>
+
     </div>
 
 
-    <!-- End of Footer -->
-
-    <!-- Bootstrap JS and Popper.js -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>  
-
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 

@@ -1,57 +1,54 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('Edit Sport') }}</div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    {{ __('Edit Sport') }}
+                </div>
+                <div class="card-body">
+                    {{-- Main Content --}}
+                    <form method="POST" action="{{ route('sport.update', ['sport' => $sport->id]) }}" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
 
-                    <div class="card-body">
-                        {{-- main content --}}
-                        <form class="user" method="POST"
-                            action="{{ route('sport.update', ['sport' => $sport->id]) }}"
-                            enctype="multipart/form-data">
-                            @csrf
-                            @method('PUT')
+                        <!-- Title Input -->
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="title" name="title" placeholder="Title" value="{{ $sport->title }}" required>
+                        </div>
 
-                            <div class="form-group">
-                                <label for="title">Title:</label><br>
-                                <input type="text" class="form-control form-control-user" id="title" name="title"
-                                    placeholder="Title" value="{{ $sport->title }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="description">Description:</label><br>
-                                <textarea class="form-control form-control-user" id="description" name="description"
-                                    placeholder="Description">{{ $sport->description }}</textarea>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                    @if ($sport->img)
-                                        <div>
-                                            <p>Current image</p>
-                                            <img src="{{ asset('storage/' . $sport->img) }}" alt="Current Photo"
-                                                width="100">
-                                        </div>
-                                    @endif
+                        <!-- Description Input -->
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control" id="description" name="description" placeholder="Description" rows="3" required>{{ $sport->description }}</textarea>
+                        </div>
+
+                        <!-- Current Image Display -->
+                        @if ($sport->img)
+                            <div class="mb-3">
+                                <label class="form-label">Current Image</label>
+                                <div>
+                                    <img src="{{ asset('storage/' . $sport->img) }}" alt="Current Sport Image" class="img-thumbnail" width="100">
                                 </div>
                             </div>
+                        @endif
 
-                            <div class="form-group row">
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <label for="photo">New image:</label><br>
-                                    <input type="file" class="form-control-file" name="img" id="img">
-                                </div>
-                            </div>
+                        <!-- New Image Input -->
+                        <div class="mb-3">
+                            <label for="img" class="form-label">New Image (optional)</label>
+                            <input type="file" class="form-control" name="img" id="img">
+                        </div>
 
-                            <button type="submit" class="btn btn-primary btn-user btn-block">
-                                Update Sport
-                            </button>
-                        </form>
-                        {{-- end of main content --}}
-                    </div>
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn btn-primary">Update Sport</button>
+                    </form>
+                    {{-- End of Main Content --}}
                 </div>
             </div>
         </div>
     </div>
+</div>
 @endsection

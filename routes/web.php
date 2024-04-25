@@ -21,10 +21,11 @@ use App\Http\Controllers\UserSubscriptionController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+// Route::get('/', function () {
+//     return view('welcome');
+// })->name('home');
 
+Route::get('/', [UserController::class, 'getCoaches'])->name('home');
 Route::get('/loginForm', [UserController::class, 'loginForm'])->name('loginform');
 Route::post('/register', [UserController::class, 'addMember'])->name('register');
 Route::post('/addUser', [UserController::class, 'addUser'])->name('addUser');
