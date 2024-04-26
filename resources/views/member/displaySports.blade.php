@@ -4,21 +4,25 @@
 <div class="container my-5">
     <h1 class="display-4 text-center mb-5">Categories and Sports</h1>
 
+       <!-- Categories Section -->
     <div class="mb-5">
         <h2 class="h3">Categories</h2>
-        <div class="row">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4"> <!-- Ensure responsive layout -->
             @foreach ($catgs as $category)
-            <div class="col-12 col-md-4 mb-4">
-                <div class="card shadow-sm">
-                    <img src="{{ asset('storage/' . $category->img) }}" alt="Category Image" class="card-img-top" style="height: 150px; object-fit: cover;">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <a href="#" class="categoryLink text-primary" data-category-id="{{ $category->id }}">{{ $category->title }}</a>
-                        </h5>
-                        <p class="card-text">{{ $category->description }}</p>
+                <div class="col mb-4"> <!-- Ensure margin between cards -->
+                    <div class="card shadow-sm"> <!-- Add a shadow for visual depth -->
+                        <!-- Card Image -->
+                        <img src="{{ asset('storage/' . $category->img) }}" alt="Category Image" class="card-img-top" style="height: 150px; object-fit: cover;">
+
+                        <!-- Card Body -->
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="#" class="categoryLink text-primary" data-category-id="{{ $category->id }}">{{ $category->title }}</a>
+                            </h5>
+                            <p class="card-text">{{ $category->description }}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
             @endforeach
         </div>
     </div>

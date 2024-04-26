@@ -16,7 +16,7 @@
             color: #000;
             overflow-x: hidden;
             height: 100%;
-            background-image: linear-gradient(to right, #e67a06, #FFD54F);
+            background-image: linear-gradient(to right, #4f104d, #000000);
             background-repeat: no-repeat;
         }
 
@@ -39,7 +39,7 @@
             -moz-box-shadow: none !important;
             -webkit-box-shadow: none !important;
             box-shadow: none !important;
-            border: 1px solid #e67a06 !important;
+            border: 1px solid #6e166b !important;
             outline-width: 0;
             font-weight: 400;
         }
@@ -63,7 +63,7 @@
 
         .card2 {
             width: 50%;
-            background-image: linear-gradient(to right, #e67a06, #000000);
+            background-image: linear-gradient(to right, #310930, #6e166b);
         }
 
         #logo {
@@ -101,7 +101,7 @@
         .btn-color {
             border-radius: 50px;
             color: #fff;
-            background-image: linear-gradient(to right, #FFD54F, #e67a06);
+            background-image: linear-gradient(to right, #6e166b,  #000000);
             padding: 15px;
             cursor: pointer;
             border: none !important;
@@ -110,21 +110,21 @@
 
         .btn-color:hover {
             color: #fff;
-            background-image: linear-gradient(to right, #e67a06, #FFD54F);
+            background-image: linear-gradient(to right, #000000, #6e166b);
         }
 
         .btn-white {
             border-radius: 50px;
-            color: #e67a06;
+            color: #6e166b;
             background-color: #fff;
             padding: 8px 40px;
             cursor: pointer;
-            border: 2px solid #e67a06 !important;
+            border: 2px solid #6e166b !important;
         }
 
         .btn-white:hover {
             color: #fff;
-            background-image: linear-gradient(to right, #FFD54F, #e67a06);
+            background-image: linear-gradient(to right, #000000, #6e166b);
         }
 
         a {
@@ -178,77 +178,18 @@
 </head>
 
 <body class="bg-gradient-primary">
-    {{-- 
-    <div class="container">
-
-        <!-- Outer Row -->
-        <div id="erroralert" class="row justify-content-center">
-
-            <div class="col-xl-10 col-lg-12 col-md-9">
-
-                <div class="card o-hidden border-0 shadow-lg my-5">
-                    <div class="card-body p-0">
-                        <!-- Nested Row within Card Body -->
-                        <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
-                            <div class="col-lg-6">
-                                @if (session('error'))
-                                    <div class="alert alert-danger mt-2 mx-2">
-                                        {{ session('error') }}
-                                    </div>
-                                @endif
-                                <div class="p-5">
-                                    <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
-                                    </div>
-                                    <form class="user" method="POST" action="{{ route('login') }}">
-                                        @csrf
-                                        <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp" name="email"
-                                                placeholder="Enter Email Address...">
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" name="password" placeholder="Password">
-                                        </div>
-
-                                        <button type="submit" class="btn btn-primary btn-user btn-block">
-                                            Login
-                                        </button>
-
-                                        <hr>
-                                    </form>
-                                    <hr>
-                                    <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Forgot Password?</a>
-                                    </div>
-                                    <div class="text-center">
-                                        <a class="small" href="{{ route('registerForm') }}">Create an Account!</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div> --}}
     <div class="container px-4 py-5 mx-auto">
         <div class="card card0">
             <div class="d-flex flex-lg-row flex-column-reverse">
                 <div class="card card1">
                     <div class="row justify-content-center my-auto">
                         <div class="col-md-8 col-10 my-5">
-                            <div class="row justify-content-center px-3 mb-3">
-                                <img id="logo" src="{{ URL::asset('/images/h.png') }}">
+                       <div class="row justify-content-center px-3 mb-3 ">
+                                <img id="logo" src="{{ URL::asset('/images/o.png') }}" style="width: 180px; height:120px;">
                             </div>
                             <h3 class="mb-5 text-center heading">We are JustMove</h3>
 
-                            <h6 class="msg-info">Please login to your account</h6>
+                        
                             <form class="user" method="POST" action="{{ route('login') }}">
                                 @csrf
                                 <div class="form-group">
