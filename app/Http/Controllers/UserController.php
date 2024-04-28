@@ -128,6 +128,7 @@ class UserController extends Controller
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
             'categorie' => 'required|string|max:255',
             'date_naissance' => 'nullable|date',
+            'sport_id' => 'nullable|exists:sports,id'
         ]);
         if ($request->hasFile('photo')) {
             if ($user->photo) {
@@ -139,6 +140,7 @@ class UserController extends Controller
         $user->email = $validatedData['email'];
         $user->categorie = $validatedData['categorie'];
         $user->date_naissance = $validatedData['date_naissance'];
+        $user->sport_id = $validatedData['sport_id'] ?? $user->sport_id;
         $user->save();
 
         $redirectRoute = ($user->type_user === 'member') ? 'membersList' : 'usersList';

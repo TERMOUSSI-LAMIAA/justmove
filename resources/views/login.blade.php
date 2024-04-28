@@ -101,7 +101,7 @@
         .btn-color {
             border-radius: 50px;
             color: #fff;
-            background-image: linear-gradient(to right, #6e166b,  #000000);
+            background-image: linear-gradient(to right, #6e166b, #000000);
             padding: 15px;
             cursor: pointer;
             border: none !important;
@@ -184,12 +184,13 @@
                 <div class="card card1">
                     <div class="row justify-content-center my-auto">
                         <div class="col-md-8 col-10 my-5">
-                       <div class="row justify-content-center px-3 mb-3 ">
-                                <img id="logo" src="{{ URL::asset('/images/o.png') }}" style="width: 180px; height:120px;">
+                            <div class="row justify-content-center px-3 mb-3 ">
+                                <img id="logo" src="{{ URL::asset('/images/o.png') }}"
+                                    style="width: 180px; height:120px;">
                             </div>
                             <h3 class="mb-5 text-center heading">We are JustMove</h3>
 
-                        
+
                             <form class="user" method="POST" action="{{ route('login') }}">
                                 @csrf
                                 <div class="form-group">
@@ -217,12 +218,16 @@
                 </div>
                 <div class="card card2">
                     <div class="my-auto mx-md-5 px-md-5 right">
-                        <h3 class="text-white">We are more than just a company</h3>
-                        <small class="text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</small>
+                        <h3 class="text-white">Welcome to JustMove</h3>
+                        <small class="text-white">
+                            Join our vibrant sports community where teamwork, motivation, and wellness are at the core
+                            of our values. Whether you're a beginner or a professional, we have activities for all
+                            levels. Log in to explore our sports programs. Are you ready to achieve your goals with us?
+                        </small>
                     </div>
                 </div>
+
+
             </div>
         </div>
     </div>

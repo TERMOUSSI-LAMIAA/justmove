@@ -14,7 +14,7 @@
 <style>
 body {
             color: #000;
-            background-image: linear-gradient(to right, #e67a06, #FFD54F);
+            background-image: linear-gradient(to right, #4f104d, #000000);
             overflow-x: hidden;
             height: 100%;
             padding: 20px;
@@ -27,7 +27,7 @@ body {
         }
         
         .form-control:focus {
-            border-color: #e67a06;
+            border-color:  #4f104d;
             outline: none;
             box-shadow: none;
         }
@@ -38,13 +38,13 @@ body {
         }
         
         .btn-primary {
-            background-image: linear-gradient(to right, #FFD54F, #e67a06);
+            background-image: linear-gradient(to right,  #4f104d, #000000);
             color: #fff;
             border: none;
         }
         
         .btn-primary:hover {
-            background-image: linear-gradient(to right, #e67a06, #FFD54F);
+            background-image: linear-gradient(to right,  #4f104d, #8d1b87);
         }
         
         .card {
@@ -55,7 +55,7 @@ body {
         }
         
         .bg-register-image {
-            background-image: url('/images/dumbbells_gym_fitness_220152_3840x2160.jpg');
+            background-image: url('/images/pexels-ivan-samkov-4164849.jpg');
             background-size: cover;
             background-position: center;
         }
@@ -145,7 +145,8 @@ body {
                                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                             </div>
                             
-                            <form method="POST" action="/register" enctype="multipart/form-data">
+                            <form method="POST" action="/register" action="{{ route('register') }}" enctype="multipart/form-data">
+                                     @csrf
                                 <!-- Name Field -->
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="name" placeholder="Full Name" required>
@@ -165,15 +166,15 @@ body {
                                 <div class="form-group">
                                     <label>Gender:</label>
                                     <div>
-                                        <input type="radio" name="gender" value="Male"> Male
-                                        <input type="radio" name="gender" value="Female"> Female
+                                        <input type="radio" name="categorie" value="Male"> Male
+                                        <input type="radio" name="categorie" value="Female"> Female
                                     </div>
                                 </div>
                                 
                                 <!-- Date of Birth -->
                                 <div class="form-group">
                                      <label>Date of Birth:</label>
-                                    <input type="date" class="form-control" name="dob" required>
+                                    <input type="date" class="form-control" name="date_naissance" required>
                                 </div>
                                 
                                 <!-- Upload Photo -->
@@ -189,7 +190,7 @@ body {
                             </form>
                             
                             <div class="text-center mt-4">
-                                <a class="small" href="/login">Already have an account? Login!</a>
+                                <a class="small" href="{{ route('loginform') }}">Already have an account? Login!</a>
                             </div>
                         </div>
                     </div>

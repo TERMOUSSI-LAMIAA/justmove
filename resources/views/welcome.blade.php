@@ -99,8 +99,7 @@
                 <div class="col mb-4">
                     <div class="card shadow-sm h-100"> <!-- Add height: 100% for equal heights -->
                         <!-- Card Image -->
-                        <img src="{{ asset('storage/' . $user->photo) }}" class="card-img-top" alt="User Image"
-                            style="height: 250px; object-fit: cover;">
+                        <img src="{{ asset('storage/' . $user->photo) }}" class="card-img-top" alt="User Image" style="height: 250px; object-fit: cover;">
 
                         <!-- Card Body -->
                         <div class="card-body text-center">

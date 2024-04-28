@@ -61,4 +61,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Session::class);
     }
+    protected static function boot()
+    {
+        parent::boot();
+        static::deleting(function ($user) {
+            $user->sessions()->delete();
+            $user->reservations()->delete();
+        });
+    }
 }

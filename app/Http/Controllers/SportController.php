@@ -35,7 +35,7 @@ class SportController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'title' => 'required|string|max:255',
+            'title' => 'required|string|max:255|unique:sport,title',
             'description' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'category_id' => 'required|exists:category,id',
@@ -101,9 +101,10 @@ class SportController extends Controller
      */
     public function destroy(string $id)
     {
-        //?soft delete
-
         $sport = Sport::findOrFail($id);
+        if ($sport->users()->count() > 0) {
+            return redirect()->route('sport.index')->with('error', 'Cannot delete sport with existing users. Please reassign or remove the associated users first.');
+        }
         if ($sport->img) {
             Storage::delete($sport->img);
         }

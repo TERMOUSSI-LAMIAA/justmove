@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Sport extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
     protected $table = 'sport';
 
     protected $fillable = [
@@ -33,4 +35,5 @@ class Sport extends Model
         return $this->belongsToMany(User::class, 'user_subscriptions');
     }
 
+  
 }

@@ -129,7 +129,8 @@
           <div class="widget">
             <h4 class="widget-title mb-3">Get in Touch</h4>
             <p class="mb-1"><a href="tel:+15057922430" class="link-light">+2126145397</a></p>
-            <p class="mb-0"><a href="mailto:info@justmove.com" class="link-light">info@justmove.com</a></p>
+            <p class="mb-1"><a href="mailto:info@justmove.com" class="link-light">info@justmove.com</a></p>
+            <p class="mb-0">Ville Nouvelle,Safi,Morocco</p>
           </div>
         </div>
 

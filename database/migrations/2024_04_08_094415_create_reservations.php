@@ -15,8 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('session_id')->constrained('sessions');
-            // $table->date('date');
-            // $table->boolean('is_valid')->default(true);
             $table->softDeletes();
             $table->timestamps();
         });

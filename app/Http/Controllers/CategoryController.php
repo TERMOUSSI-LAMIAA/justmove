@@ -31,7 +31,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
+            'title' => 'required|string|max:255|unique:category,title',
             'description' => 'required|string',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
@@ -39,7 +39,6 @@ class CategoryController extends Controller
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('imgs', 'public');
         } else {
-            // Handle the case where no file is uploaded
             return redirect()->back()->with('error', 'No image file uploaded.');
         }
 
@@ -55,7 +54,7 @@ class CategoryController extends Controller
         $category->save();
 
         // Redirect back or to any other route
-        return redirect()->back()->with('success', 'Category created successfully');
+        return redirect()->route('category.index')->with('success', 'Category created successfully');
     }
 
     /**
@@ -106,9 +105,10 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //?soft delete
         $category = Category::findOrFail($id);
-
+        if ($category->sports()->count() > 0) {
+            return redirect()->route('category.index')->with('error', 'Cannot delete category with existing sports. Please remove the associated sports first.');
+        }
         if ($category->img) {
             Storage::delete($category->img);
         }
