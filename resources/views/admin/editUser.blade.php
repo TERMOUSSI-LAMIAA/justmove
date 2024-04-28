@@ -69,18 +69,19 @@
                                 <input type="file" class="form-control" name="photo" id="photo">
                             </div>
                             <!-- Sport Selection -->
-                            <div class="mb-3">
-                                <label for="sport_id" class="form-label">Sport</label>
-                                <select class="form-control" id="sport_id" name="sport_id" required>
-                                    @foreach ($sports as $sport)
-                                        <option value="{{ $sport->id }}"
-                                            {{ $sport->id == old('sport_id', $currentSportId) ? 'selected' : '' }}>
-                                            {{ $sport->title }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-
+                            @if ($user->type_user === 'user')
+                                <div class="mb-3">
+                                    <label for="sport_id" class="form-label">Sport</label>
+                                    <select class="form-control" id="sport_id" name="sport_id" required>
+                                        @foreach ($sports as $sport)
+                                            <option value="{{ $sport->id }}"
+                                                {{ $sport->id == old('sport_id', $currentSportId) ? 'selected' : '' }}>
+                                                {{ $sport->title }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            @endif
                             <!-- Submit Button -->
                             <button type="submit" class="btn btn-primary">Update User</button>
                         </form>

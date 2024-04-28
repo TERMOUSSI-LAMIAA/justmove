@@ -116,8 +116,10 @@ class UserController extends Controller
     }
 
     public function editUserForm($id){
+        $sports=Sport::all();
         $user = User::findOrFail($id);
-        return view("admin.editUser",compact("user"));
+        $currentSportId = $user->sport_id ?? null; 
+        return view("admin.editUser",compact("user","sports", "currentSportId"));
     }
 
     public function updateUser(Request $request, $id){

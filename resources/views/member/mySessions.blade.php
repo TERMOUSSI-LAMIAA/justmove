@@ -1,14 +1,6 @@
-<!-- resources/views/member/mySessions.blade.php -->
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.guest')
 
-<head>
-    <meta charset="UTF-8">
-    <title>My Sessions</title>
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}"> <!-- Add a link to your CSS file -->
-</head>
-
-<body>
+@section('content')
     <div class="container">
         <h1>My Sessions</h1>
         
@@ -43,6 +35,4 @@
             </table>
         @endif
     </div>
-</body>
-
-</html>
+@endsection

@@ -34,7 +34,7 @@
                             <td>{{ $member->name }}</td>
                             <td>{{ $member->email }}</td>
                             <td>{{ $member->categorie}}</td>
-                            <td>{{ \Carbon\Carbon::parse($member->birthdate)->format('M d, Y') }}</td>
+                            <td>{{ $member->date_naissance}}</td>
                             <td>
                                 @if (Auth::user()->type_user === 'admin')
                                     <a href="{{ route('editUserForm', ['id' => $member->id]) }}" class="btn btn-sm btn-outline-primary">Edit</a>

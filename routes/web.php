@@ -38,7 +38,7 @@ use App\Http\Controllers\UserSubscriptionController;
     Route::resource('sport', SportController::class);
     Route::resource('subscription', SubscriptionController::class);
     //?
-    Route::get('/membersList', [UserController::class, 'membersList'])->name('membersList');
+    // Route::get('/membersList', [UserController::class, 'membersList'])->name('membersList');
     //?
 
     Route::get('/admin/editUserForm/{id}', [UserController::class, 'editUserForm'])->name('editUserForm');
@@ -47,7 +47,7 @@ use App\Http\Controllers\UserSubscriptionController;
  });
  Route::middleware(['auth', 'user'])->group(function () {
     //?
-    Route::get('/membersList', [UserController::class, 'membersList'])->name('membersList');
+    // Route::get('/membersList', [UserController::class, 'membersList'])->name('membersList');
     //?
     Route::resource('session', SessionController::class);
 
@@ -79,3 +79,4 @@ Route::get('/category/{category}/sports', [memberDashboard::class, 'getCategoryS
 Route::get('/sport/{sport}/sessions', [memberDashboard::class, 'getSportSessions']);
 
 
+Route::get('/membersList', [UserController::class, 'membersList'])->name('membersList');
