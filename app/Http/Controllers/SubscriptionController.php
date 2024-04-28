@@ -33,16 +33,12 @@ class SubscriptionController extends Controller
             'name' => 'required|string',
             'session_count' => 'required|integer',
             'price' => 'required|numeric',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date',
         ]);
 
         $subscription = new Subscription([
             'name' => $validatedData['name'],
             'session_count' => $validatedData['session_count'],
             'price' => $validatedData['price'],
-            'start_date' => $validatedData['start_date'],
-            'end_date' => $validatedData['end_date'],
         ]);
 
         $subscription->save();
@@ -76,8 +72,6 @@ class SubscriptionController extends Controller
             'name' => 'required|string',
             'session_count' => 'required|integer',
             'price' => 'required|numeric',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date',
         ]);
 
         $subscription = Subscription::findOrFail($id);
@@ -93,6 +87,13 @@ class SubscriptionController extends Controller
     public function destroy(string $id)
     {
         $subscription = Subscription::findOrFail($id);
+
+        if ($subscription->users()->count() > 0) {
+            return redirect()
+                ->route('subscription.index')
+                ->with('error', 'Cannot delete subscription. It has associated users.');
+        }
+
         $subscription->delete();
 
         return redirect()->route('subscription.index')->with('success', 'Subscription deleted successfully');
