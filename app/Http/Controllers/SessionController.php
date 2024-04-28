@@ -41,7 +41,7 @@ class SessionController extends Controller
         $validatedData = $request->validate([
             'date' => 'required|date',
             'start_time' => 'required|date_format:H:i',
-            'end_time' => 'required|date_format:H:i |after:start_time',
+            'end_time' => 'required|date_format:H:i|after:start_time',
             'capacity' => 'required|integer|min:1',
         ]);
 
@@ -104,6 +104,9 @@ class SessionController extends Controller
         $session = Session::find($id);
 
         if ($session) {
+            if ($session->reservations()->count() > 0) {
+                return redirect()->back()->with('error', 'Cannot delete session because it has related reservations.');
+            }
             $session->delete();
 
             return redirect()->back()->with('success', 'Session deleted successfully');

@@ -99,7 +99,7 @@
             </div>
         @endif
         
-        <div class="container-fluid">
+        <div>
             @yield('content')
         </div>
 {{-- Footer --}}

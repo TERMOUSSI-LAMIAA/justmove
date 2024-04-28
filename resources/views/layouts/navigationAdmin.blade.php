@@ -58,7 +58,7 @@
         </div>
     </li>
     {{-- categories --}}
-    {{-- <li class="nav-item">
+{{-- <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCategories"
             aria-expanded="true" aria-controls="collapseCategories">
             <i class="fas fa-fw fa-tags"></i>
@@ -74,10 +74,10 @@
         </div>
     </li> --}}
 
-    {{-- end  categories --}}
+{{-- end  categories --}}
 
-    <!-- Nav Item - Pages Collapse Menu -->
-    {{-- <li class="nav-item">
+<!-- Nav Item - Pages Collapse Menu -->
+{{-- <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
             aria-expanded="true" aria-controls="collapsePages">
             <i class="fas fa-fw fa-folder"></i>
@@ -151,7 +151,7 @@
             </form>
 
             <!-- Topbar Navbar --> --}}
-            {{-- <ul class="navbar-nav ml-auto">
+{{-- <ul class="navbar-nav ml-auto">
 
                 <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                 <li class="nav-item dropdown no-arrow d-sm-none">
@@ -176,8 +176,8 @@
                     </div>
                 </li> --}}
 
-                <!-- Nav Item - Alerts -->
-                {{-- <li class="nav-item dropdown no-arrow mx-1">
+<!-- Nav Item - Alerts -->
+{{-- <li class="nav-item dropdown no-arrow mx-1">
                     <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-bell fa-fw"></i>
@@ -229,8 +229,8 @@
                     </div>
                 </li> --}}
 
-                <!-- Nav Item - Messages -->
-                {{-- <li class="nav-item dropdown no-arrow mx-1">
+<!-- Nav Item - Messages -->
+{{-- <li class="nav-item dropdown no-arrow mx-1">
                     <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-envelope fa-fw"></i>
@@ -328,11 +328,11 @@
 
             </ul> --}}
 
-        {{-- </nav>  --}}
-        <!-- End of Topbar -->
+{{-- </nav>  --}}
+<!-- End of Topbar -->
 
 
- {{-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+{{-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="{{ route('admin.dashboard') }}">
         <i class="fas fa-laugh-wink"></i> JustMove
     </a>
@@ -362,95 +362,73 @@
         </ul>
     </div>
 </nav> --}}
-<nav class="navbar navbar-expand-lg bg-dark" >
-  <a class="navbar-brand" href="{{route('admin.dashboard')}}">JustMove</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {{ auth()->user()->name }}
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
-        </div>
-      </li>
-    </ul>
-  </div>
-</nav>
 
 
-    <!-- Sidebar and Content -->
-    <div class="container-fluid d-flex">
-        <!-- Sidebar -->
-        <div class="bg-dark border-right p-3" id="sidebar">
-            <ul class="nav flex-column">
+<!-- Sidebar -->
+<div class="bg-dark border-right p-3" id="sidebar">
+    <ul class="nav flex-column">
+        <li class="nav-item">
+            <a href="{{ route('admin.dashboard') }}" class="nav-link">
+                <i class="fas fa-tachometer-alt"></i> Dashboard
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="#userSubMenu" class="nav-link" data-toggle="collapse">
+                <i class="fas fa-users"></i> Users
+            </a>
+            <ul class="collapse" id="userSubMenu">
                 <li class="nav-item">
-                    <a href="{{ route('admin.dashboard') }}" class="nav-link">
-                        <i class="fas fa-tachometer-alt"></i> Dashboard
-                    </a>
+                    <a href="{{ route('usersList') }}" class="nav-link">Users List</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#userSubMenu" class="nav-link" data-toggle="collapse">
-                        <i class="fas fa-users"></i> Users
-                    </a>
-                    <ul class="collapse" id="userSubMenu">
-                        <li class="nav-item">
-                            <a href="{{ route('usersList') }}" class="nav-link">Users List</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('addUserForm') }}" class="nav-link">Add User</a>
-                        </li>
-                    </ul>
+                    <a href="{{ route('addUserForm') }}" class="nav-link">Add User</a>
                 </li>
-                <li class="nav-item">
-                    <a href="#categorySubMenu" class="nav-link" data-toggle="collapse">
-                        <i class="fas fa-tags"></i> Categories
-                    </a>
-                    <ul class="collapse" id="categorySubMenu">
-                        <li class="nav-item">
-                            <a href="{{ route('category.index') }}" class="nav-link">Categories List</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('category.create') }}" class="nav-link">Add Category</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a href="#sportSubMenu" class="nav-link" data-toggle="collapse">
-                        <i class="fas fa-futbol"></i> Sports
-                    </a>
-                    <ul class="collapse" id="sportSubMenu">
-                        <li class="nav-item">
-                            <a href="{{ route('sport.index') }}" class="nav-link">Sports List</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('sport.create') }}" class="nav-link">Add Sport</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a href="#subscriptionSubMenu" class="nav-link" data-toggle="collapse">
-                        <i class="fas fa-book"></i> Subscriptions
-                    </a>
-                    <ul class="collapse" id="subscriptionSubMenu">
-                        <li class="nav-item">
-                            <a href="{{ route('subscription.index') }}" class="nav-link">All Subscriptions</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('subscription.create') }}" class="nav-link">Add Subscription</a>
-                        </li>
-                    </ul>
-                </li>
-                 <!-- Members Link -->
-    <li class="nav-item">
-        <a href="{{ route('membersList') }}" class="nav-link">
-            <i class="fas fa-users"></i> Members List
-        </a>
-    </li>
             </ul>
-        </div>
-
-    </div>
+        </li>
+        <li class="nav-item">
+            <a href="#categorySubMenu" class="nav-link" data-toggle="collapse">
+                <i class="fas fa-tags"></i> Categories
+            </a>
+            <ul class="collapse" id="categorySubMenu">
+                <li class="nav-item">
+                    <a href="{{ route('category.index') }}" class="nav-link">Categories List</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('category.create') }}" class="nav-link">Add Category</a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item">
+            <a href="#sportSubMenu" class="nav-link" data-toggle="collapse">
+                <i class="fas fa-futbol"></i> Sports
+            </a>
+            <ul class="collapse" id="sportSubMenu">
+                <li class="nav-item">
+                    <a href="{{ route('sport.index') }}" class="nav-link">Sports List</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('sport.create') }}" class="nav-link">Add Sport</a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item">
+            <a href="#subscriptionSubMenu" class="nav-link" data-toggle="collapse">
+                <i class="fas fa-book"></i> Subscriptions
+            </a>
+            <ul class="collapse" id="subscriptionSubMenu">
+                <li class="nav-item">
+                    <a href="{{ route('subscription.index') }}" class="nav-link">All Subscriptions</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('subscription.create') }}" class="nav-link">Add Subscription</a>
+                </li>
+            </ul>
+        </li>
+        <!-- Members Link -->
+        <li class="nav-item">
+            <a href="{{ route('membersList') }}" class="nav-link">
+                <i class="fas fa-users"></i> Members List
+            </a>
+        </li>
+    </ul>
+</div>

@@ -69,4 +69,17 @@ class User extends Authenticatable
             $user->reservations()->delete();
         });
     }
+
+    public function isAdmin()
+    {
+        return $this->type_user === "admin";
+    }
+    public function isUser()
+    {
+        return $this->type_user === "user";
+    }
+    public function isMember()
+    {
+        return $this->type_user === "member";
+    }
 }

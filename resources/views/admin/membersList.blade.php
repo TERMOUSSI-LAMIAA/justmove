@@ -33,7 +33,7 @@
                             </td>
                             <td>{{ $member->name }}</td>
                             <td>{{ $member->email }}</td>
-                            <td>{{ $member->category }}</td>
+                            <td>{{ $member->categorie}}</td>
                             <td>{{ \Carbon\Carbon::parse($member->birthdate)->format('M d, Y') }}</td>
                             <td>
                                 @if (Auth::user()->type_user === 'admin')

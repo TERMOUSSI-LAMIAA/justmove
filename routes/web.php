@@ -25,7 +25,7 @@ use App\Http\Controllers\UserSubscriptionController;
 //     return view('welcome');
 // })->name('home');
 
-// Route::middleware(['auth', 'admin'])->group(function () {
+ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/addUser', [UserController::class, 'addUser'])->name('addUser');
     Route::get('/addUserForm', [UserController::class, 'addUserForm'])->name('addUserForm');
 
@@ -44,8 +44,8 @@ use App\Http\Controllers\UserSubscriptionController;
     Route::get('/admin/editUserForm/{id}', [UserController::class, 'editUserForm'])->name('editUserForm');
     Route::get('/admin/editmemberForm', [UserController::class, 'editmemberForm'])->name('editmemberForm');
     Route::delete('/admin/deletemember', [UserController::class, 'deletemember'])->name('deletemember');
-// });
-// Route::middleware(['auth', 'user'])->group(function () {
+ });
+ Route::middleware(['auth', 'user'])->group(function () {
     //?
     Route::get('/membersList', [UserController::class, 'membersList'])->name('membersList');
     //?
@@ -56,13 +56,13 @@ use App\Http\Controllers\UserSubscriptionController;
     Route::post('/user/subscribe', [UserSubscriptionController::class, 'subscribe'])->name('subscribe');
     Route::get('/user/subscriptionsList', [UserController::class, 'subscriptionsList'])->name('subscriptionsList');
     
-// });
-// Route::middleware(['auth', 'member'])->group(function () {
+ });
+ Route::middleware(['auth', 'member'])->group(function () {
     Route::get('/member/displaySports', [memberDashboard::class, 'displayCatgs'])->name('displaySports');
     Route::get('/member/memberSession', [memberDashboard::class, 'memberSession'])->name("memberSession");
     Route::delete('/member/cancelReserv/{reservation}', [memberDashboard::class, 'cancelReserv'])->name("cancelReserv");
     Route::post('/reserve-session', [memberDashboard::class, 'reserveSession'])->name('reserveSession');
-// });
+ });
 Route::get('/', [UserController::class, 'getCoaches'])->name('home');
 Route::get('/loginForm', [UserController::class, 'loginForm'])->name('loginform');
 Route::post('/register', [UserController::class, 'addMember'])->name('register');
